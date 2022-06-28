@@ -30,12 +30,13 @@ public class UserServiceImpl implements UserService {
             updateUser(user);
         }
     }
-
-    private void createUser(User user) {
+    @Override
+    public void createUser(User user) {
         userDao.createUser(user);
     }
 
-    private void updateUser(User user) {
+    @Override
+    public void updateUser(User user) {
         userDao.updateUser(user);
     }
 

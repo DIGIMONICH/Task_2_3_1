@@ -13,4 +13,7 @@ public interface UserService {
     User deleteUser(long parseUnsignedInt);
 
     void createOrUpdateUser(User user);
+    void createUser (User user);
+
+    void updateUser (User user);
 }

@@ -1,6 +1,7 @@
 package project.dao;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import project.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,26 +15,27 @@ public class UserDaoImp implements UserDao {
 
    @Override
    public List<User> getAllUsers() {
-      return entityManager.createQuery("from user", User.class).getResultList();
+      return entityManager.createQuery("SELECT u FROM User u").getResultList();
    }
-
+  @Transactional
    @Override
    public void createUser(User user) {
       entityManager.persist(user);
-      entityManager.flush();
    }
 
+   @Transactional
    @Override
    public void updateUser(User user) {
       entityManager.merge(user);
-      entityManager.flush();
    }
 
    @Override
+   @Transactional
    public User readUser(long id) {
       return entityManager.find(User.class, id);
    }
 
+   @Transactional
    @Override
    public User deleteUser(long id) throws NullPointerException {
       User user = readUser(id);
@@ -41,7 +43,6 @@ public class UserDaoImp implements UserDao {
          throw new NullPointerException("User not found");
       }
       entityManager.remove(user);
-      entityManager.flush();
       return user;
    }
 }
