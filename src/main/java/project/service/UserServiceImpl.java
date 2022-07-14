@@ -24,7 +24,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createOrUpdateUser(User user) {
-        if (0 == user.getId()) {
+        List<User> users = getAllUsers();
+        boolean coincidences = false;
+        for(User user1: users) {
+            if (user1.getId() == user.getId()) {
+                coincidences = true;
+                break;
+            }
+        }
+        if (!coincidences) {
             createUser(user);
         } else {
             updateUser(user);

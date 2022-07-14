@@ -27,7 +27,10 @@
         <td th:utext="${user.email}">email</td>
         <td>
             <a type="button" th:href="@{/users/updateUser(id=${user.getId()})}" class="btn btn-secondary">Редактировать</a>
-            <a type="button" th:href="@{/users/deleteUser(id=${user.getId()})}" class="btn btn-secondary">Удалить</a>
+            <form th:method="DELETE" th:action="@{/users/deleteUser(id=${user.getId()})}">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="Удалить">
+            </form>
         </td>
 
     </tr>
